@@ -1,4 +1,5 @@
 import customtkinter as ctk
+import buttons
 
 
 def main():
@@ -10,6 +11,8 @@ def main():
     app.geometry("440x260")
     app.resizable(False, False)
     app.title("SimpleStopwatch by xbryan")
+
+    buttons.Buttons(app)
 
     app.mainloop()
 
