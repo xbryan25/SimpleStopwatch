@@ -1,18 +1,22 @@
 import customtkinter as ctk
 import time
-import pyglet
 
-# pyglet is imported to make the font readable to customtkinter
-pyglet.font.add_file('/Assets/Fonts/digital-7.ttf')
 
 class DisplayTime:
     def __init__(self, window):
 
         self.window = window
 
-        self.text = "00:00:00:00"
+        self.font_tuple = ("Times New Roman", 50)
 
-        # Initializing the buttons
-        self.time_label = ctk.CTkLabel(self.window, text=f"{self.text}", fg_color="transparent",
-                                       font=("/Assets/Fonts/digital-7.ttf", 25))
-        self.time_label.place(x=10, y=50)
+        self.seconds = [0, 0]
+        self.minutes = [0, 0]
+        self.hours = [0, 0]
+
+        # Initializing the label
+        self.time_label = ctk.CTkLabel(self.window, text="00:00:00", fg_color="transparent",
+                                       font=self.font_tuple)
+        self.time_label.place(x=120, y=50)
+
+    def start_time(self):
+        time_start = time.time()
