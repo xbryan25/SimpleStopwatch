@@ -1,5 +1,6 @@
 import customtkinter as ctk
 import buttons
+import display_time
 
 
 def main():
@@ -13,6 +14,7 @@ def main():
     app.title("SimpleStopwatch by xbryan")
 
     buttons.Buttons(app)
+    display_time.DisplayTime(app)
 
     app.mainloop()
 
