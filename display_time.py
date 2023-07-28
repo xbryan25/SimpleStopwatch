@@ -21,7 +21,9 @@ class DisplayTime:
         self.time_label.place(x=120, y=50)
 
     def start_time(self):
-        time.sleep(1)
+
+        # The delay is 0.97 seconds to match the delay of the label.after function
+        time.sleep(0.97)
         self.second += 1
 
         if self.second == 60:
@@ -32,7 +34,7 @@ class DisplayTime:
             self.hour += 1
 
         if self.stop == 0:
-            self.time_label.configure(text=f"0{self.hour}:0{self.minute}:0{self.second}")
-            self.time_label.after(300, lambda: self.start_time())
+            self.time_label.configure(text=f"{self.hour}:{self.minute}:{self.second}")
+            self.time_label.after(30, lambda: self.start_time())
 
 
