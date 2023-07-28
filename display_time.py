@@ -29,7 +29,9 @@ class DisplayTime:
         if self.second == 60:
             self.second = 0
             self.minute += 1
-        elif self.minute == 60:
+
+        # This is if not elif so that self.minute turns to 0 as an hour comes
+        if self.minute == 60:
             self.minute = 0
             self.hour += 1
 
