@@ -33,6 +33,6 @@ class DisplayTime:
 
         if self.stop == 0:
             self.time_label.configure(text=f"0{self.hour}:0{self.minute}:0{self.second}")
-            self.time_label.after(300, self.start_time)
+            self.time_label.after(300, lambda: self.start_time())
 
 
