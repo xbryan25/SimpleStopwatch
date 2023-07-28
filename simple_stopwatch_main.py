@@ -14,7 +14,6 @@ def main():
     app.title("SimpleStopwatch by xbryan")
 
     buttons.Buttons(app)
-    display_time.DisplayTime(app)
 
     app.mainloop()
 
