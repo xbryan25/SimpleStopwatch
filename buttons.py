@@ -17,7 +17,8 @@ class Buttons:
         self.start_button.place(x=35, y=150)
 
         self.stop_button = ctk.CTkButton(self.window, text="Stop",
-                                         hover_color='blue', width=100, height=75)
+                                         hover_color='blue', width=100, height=75,
+                                         command=lambda: self.stop_stopwatch())
         self.stop_button.place(x=160, y=150)
 
         self.reset_button = ctk.CTkButton(self.window, text="Reset",
@@ -29,4 +30,6 @@ class Buttons:
 
         self.display_time_inst.start_time()
 
+    def stop_stopwatch(self):
+        self.display_time_inst.stop_time()
 
