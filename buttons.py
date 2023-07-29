@@ -31,6 +31,15 @@ class Buttons:
         self.reset_button.place(x=305, y=150)
         self.reset_button.configure(state="disabled")
 
+        self.minimize_button = ctk.CTkButton(self.window, text="-",
+                                             hover_color='blue', width=20, height=20,
+                                             command=lambda: self.minimize())
+        self.minimize_button.place(x=400, y=0)
+
+        self.maximize_button = ctk.CTkButton(self.window, text="+",
+                                             hover_color='blue', width=20, height=20,
+                                             command=lambda: self.maximize())
+
     def start_stopwatch(self):
         self.stop_button.configure(state="normal")
         self.start_button.configure(state="disabled")
@@ -78,4 +87,29 @@ class Buttons:
 
         self.display_time_inst.reset_time()
 
+    def minimize(self):
+        self.start_button.place_forget()
+        self.continue_button.place_forget()
+        self.reset_button.place_forget()
+        self.stop_button.place_forget()
 
+        self.display_time_inst.time_label.place_forget()
+
+        self.maximize_button.place(x=0, y=0)
+
+        # Removes title bar
+        self.window.overrideredirect(True)
+
+        # self.window.wm_attributes('-topmost', 'True')
+
+        self.window.geometry("175x75")
+
+    def maximize(self):
+        self.window.geometry("440x260")
+        self.window.overrideredirect(False)
+
+        self.start_button.place(x=35, y=150)
+        self.stop_button.place(x=160, y=150)
+        self.reset_button.place(x=305, y=150)
+
+        self.display_time_inst.time_label.place(x=120, y=50)
