@@ -43,3 +43,10 @@ class DisplayTime:
 
     def continue_time(self):
         self.stop = False
+
+    def reset_time(self):
+        self.second = 0
+        self.minute = 0
+        self.hour = 0
+
+        self.time_label.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
