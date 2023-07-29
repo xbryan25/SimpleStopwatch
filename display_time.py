@@ -38,6 +38,8 @@ class DisplayTime:
             self.time_label.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
             self.time_label.after(30, lambda: self.start_time())
 
+            print("hey")
+
     def stop_time(self):
         self.stop = True
 
