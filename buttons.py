@@ -100,9 +100,14 @@ class Buttons:
         # Removes title bar
         self.window.overrideredirect(True)
 
-        # self.window.wm_attributes('-topmost', 'True')
+        self.window.bind("<B1-Motion>", self.move_app)
+
+        self.window.wm_attributes('-topmost', 'True')
 
         self.window.geometry("175x75")
+
+    def move_app(self, event):
+        self.window.geometry(f"+{event.x_root - 110}+{event.y_root - 38}")
 
     def maximize(self):
         self.window.geometry("440x260")
