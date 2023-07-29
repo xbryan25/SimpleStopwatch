@@ -1,6 +1,9 @@
 import customtkinter as ctk
 import buttons
-import display_time
+
+# TODO: Figure out why the color of the title bar changes when the window gets maximized
+# TODO: Finish the minimized version of the stopwatch
+# TODO: Redesign the application
 
 
 def main():

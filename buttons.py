@@ -111,6 +111,7 @@ class Buttons:
 
     def maximize(self):
         self.window.geometry("440x260")
+
         self.window.overrideredirect(False)
 
         self.start_button.place(x=35, y=150)
