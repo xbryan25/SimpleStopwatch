@@ -92,6 +92,7 @@ class Buttons:
         self.continue_button.place_forget()
         self.reset_button.place_forget()
         self.stop_button.place_forget()
+        self.minimize_button.place_forget()
 
         self.display_time_inst.time_label.place_forget()
 
@@ -114,8 +115,11 @@ class Buttons:
 
         self.window.overrideredirect(False)
 
+        self.maximize_button.place_forget()
+
         self.start_button.place(x=35, y=150)
         self.stop_button.place(x=160, y=150)
         self.reset_button.place(x=305, y=150)
+        self.minimize_button.place(x=400, y=0)
 
         self.display_time_inst.time_label.place(x=120, y=50)
