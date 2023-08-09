@@ -10,6 +10,8 @@ class Buttons:
         self.display_time_inst = display_time.DisplayTime(self.window)
 
         # Initializing the buttons
+
+        # When window is maximized
         self.start_button = ctk.CTkButton(self.window, text="Start",
                                           hover_color='blue', width=100, height=75,
                                           command=lambda: self.start_stopwatch())
@@ -36,17 +38,50 @@ class Buttons:
                                              command=lambda: self.minimize())
         self.minimize_button.place(x=400, y=0)
 
+        # When window is minimized
         self.maximize_button = ctk.CTkButton(self.window, text="+",
                                              hover_color='blue', width=20, height=20,
                                              command=lambda: self.maximize())
 
-    def start_stopwatch(self):
-        self.stop_button.configure(state="normal")
-        self.start_button.configure(state="disabled")
+        self.exit_button = ctk.CTkButton(self.window, text="x",
+                                         hover_color='blue', width=20, height=20,
+                                         command=lambda: self.exit())
 
-        if not self.display_time_inst.stop:
-            self.display_time_inst.continue_time()
-        self.display_time_inst.start_time()
+        self.mini_start_button = ctk.CTkButton(self.window, text="▶",
+                                               hover_color='blue', width=20, height=20,
+                                               command=lambda: self.start_stopwatch())
+
+        self.mini_continue_button = ctk.CTkButton(self.window, text="▶",
+                                                  hover_color='blue', width=20, height=20,
+                                                  command=lambda: self.continue_stopwatch())
+
+        self.mini_stop_button = ctk.CTkButton(self.window, text="◼",
+                                              hover_color='blue', width=20, height=20,
+                                              command=lambda: self.stop_stopwatch())
+
+        self.mini_stop_button.configure(state="disabled")
+
+        self.mini_reset_button = ctk.CTkButton(self.window, text="🔁",
+                                               hover_color='blue', width=100, height=75,
+                                               command=lambda: self.reset_stopwatch())
+
+        self.mini_reset_button.configure(state="disabled")
+
+    def start_stopwatch(self):
+        if self.mini_start_button.winfo_ismapped():
+            self.mini_stop_button.configure(state="normal")
+            self.mini_start_button.configure(state="disabled")
+
+            if not self.display_time_inst.stop:
+                self.display_time_inst.continue_time()
+            self.display_time_inst.start_time()
+        else:
+            self.stop_button.configure(state="normal")
+            self.start_button.configure(state="disabled")
+
+            if not self.display_time_inst.stop:
+                self.display_time_inst.continue_time()
+            self.display_time_inst.start_time()
 
     def stop_stopwatch(self):
         self.display_time_inst.stop_time()
@@ -97,6 +132,12 @@ class Buttons:
         self.display_time_inst.time_label.place_forget()
 
         self.maximize_button.place(x=0, y=0)
+        self.exit_button.place(x=155, y=0)
+
+        # Add minimized buttons
+        self.mini_start_button.place(x=0, y=50)
+        self.mini_stop_button.place(x=30, y=50)
+        # self.mini_reset_button.place(x=305, y=150)
 
         # Removes title bar
         self.window.overrideredirect(True)
@@ -123,3 +164,6 @@ class Buttons:
         self.minimize_button.place(x=400, y=0)
 
         self.display_time_inst.time_label.place(x=120, y=50)
+
+    def exit(self):
+        self.window.destroy()
