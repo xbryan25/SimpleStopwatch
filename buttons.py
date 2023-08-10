@@ -129,7 +129,8 @@ class Buttons:
         self.stop_button.place_forget()
         self.minimize_button.place_forget()
 
-        self.display_time_inst.time_label.place_forget()
+        self.display_time_inst.time_label_max.place_forget()
+        self.display_time_inst.time_label_min.place(x=35, y=15)
 
         self.maximize_button.place(x=0, y=0)
         self.exit_button.place(x=155, y=0)

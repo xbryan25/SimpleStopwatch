@@ -7,7 +7,8 @@ class DisplayTime:
 
         self.window = window
 
-        self.font_tuple = ("Times New Roman", 50)
+        self.font_tuple_1 = ("Times New Roman", 50)
+        self.font_tuple_2 = ("Times New Roman", 30)
 
         self.second = 0
         self.minute = 0
@@ -16,9 +17,13 @@ class DisplayTime:
         self.stop = False
 
         # Initializing the label
-        self.time_label = ctk.CTkLabel(self.window, text="00:00:00", fg_color="transparent",
-                                       font=self.font_tuple)
-        self.time_label.place(x=120, y=50)
+
+        self.time_label_max = ctk.CTkLabel(self.window, text="00:00:00", fg_color="transparent",
+                                           font=self.font_tuple_1)
+        self.time_label_max.place(x=120, y=50)
+
+        self.time_label_min = ctk.CTkLabel(self.window, text="00:00:00", fg_color="transparent",
+                                           font=self.font_tuple_2)
 
     def start_time(self):
         if not self.stop:
@@ -35,8 +40,8 @@ class DisplayTime:
                 self.minute = 0
                 self.hour += 1
 
-            self.time_label.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
-            self.time_label.after(30, lambda: self.start_time())
+            self.time_label_max.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
+            self.time_label_max.after(30, lambda: self.start_time())
 
     def stop_time(self):
         self.stop = True
@@ -49,4 +54,4 @@ class DisplayTime:
         self.minute = 0
         self.hour = 0
 
-        self.time_label.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
+        self.time_label_max.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
