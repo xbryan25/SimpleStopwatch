@@ -36,7 +36,7 @@ class Buttons:
         self.minimize_button = ctk.CTkButton(self.window, text="-",
                                              hover_color='blue', width=20, height=20,
                                              command=lambda: self.minimize())
-        self.minimize_button.place(x=400, y=0)
+        self.minimize_button.place(x=420, y=0)
 
         # When window is minimized
         self.maximize_button = ctk.CTkButton(self.window, text="+",
@@ -62,15 +62,18 @@ class Buttons:
         self.mini_stop_button.configure(state="disabled")
 
         self.mini_reset_button = ctk.CTkButton(self.window, text="🔁",
-                                               hover_color='blue', width=100, height=75,
+                                               hover_color='blue', width=20, height=20,
                                                command=lambda: self.reset_stopwatch())
 
         self.mini_reset_button.configure(state="disabled")
 
     def start_stopwatch(self):
         if self.mini_start_button.winfo_ismapped():
-            self.mini_stop_button.configure(state="normal")
             self.mini_start_button.configure(state="disabled")
+            self.mini_start_button.place_forget()
+
+            self.mini_stop_button.configure(state="normal")
+            self.mini_stop_button.place(x=0, y=50)
 
             if not self.display_time_inst.stop:
                 self.display_time_inst.continue_time()
@@ -86,27 +89,45 @@ class Buttons:
     def stop_stopwatch(self):
         self.display_time_inst.stop_time()
 
-        # Updates button status
-        self.reset_button.configure(state="normal")
-        self.stop_button.configure(state="disabled")
+        if self.mini_stop_button.winfo_ismapped():
+            self.mini_stop_button.configure(state="disabled")
+            self.mini_stop_button.place_forget()
 
-        # Once stop button is pressed, the continue button will replace it
-        if self.start_button.winfo_ismapped():
-            self.start_button.place_forget()
+            self.mini_continue_button.configure(state="normal")
+            self.mini_continue_button.place(x=0, y=50)
 
-        if not self.continue_button.winfo_ismapped():
-            self.continue_button.place(x=35, y=150)
+            self.mini_reset_button.configure(state="normal")
         else:
-            self.continue_button.configure(state="normal")
+            # Updates button status
+            self.reset_button.configure(state="normal")
+            self.stop_button.configure(state="disabled")
+
+            # Once stop button is pressed, the continue button will replace it
+            if self.start_button.winfo_ismapped():
+                self.start_button.place_forget()
+
+            if not self.continue_button.winfo_ismapped():
+                self.continue_button.place(x=35, y=150)
+            else:
+                self.continue_button.configure(state="normal")
 
     def continue_stopwatch(self):
-        # Updates button status
-        self.reset_button.configure(state="disabled")
-        self.stop_button.configure(state="normal")
-        self.continue_button.configure(state="disabled")
+        if self.mini_continue_button.winfo_ismapped():
+            self.mini_reset_button.configure(state="disabled")
 
-        self.display_time_inst.continue_time()
-        self.display_time_inst.start_time()
+            self.mini_stop_button.configure(state="normal")
+            self.mini_stop_button.place(x=0, y=50)
+
+            self.display_time_inst.continue_time()
+            self.display_time_inst.start_time()
+        else:
+            # Updates button status
+            self.reset_button.configure(state="disabled")
+            self.stop_button.configure(state="normal")
+            self.continue_button.configure(state="disabled")
+
+            self.display_time_inst.continue_time()
+            self.display_time_inst.start_time()
 
     def reset_stopwatch(self):
         # Updates button status
@@ -132,13 +153,14 @@ class Buttons:
         self.display_time_inst.time_label_max.place_forget()
         self.display_time_inst.time_label_min.place(x=35, y=15)
 
+        self.display_time_inst.time_update()
+
         self.maximize_button.place(x=0, y=0)
         self.exit_button.place(x=155, y=0)
 
         # Add minimized buttons
         self.mini_start_button.place(x=0, y=50)
-        self.mini_stop_button.place(x=30, y=50)
-        # self.mini_reset_button.place(x=305, y=150)
+        self.mini_reset_button.place(x=30, y=50)
 
         # Removes title bar
         self.window.overrideredirect(True)
@@ -158,13 +180,20 @@ class Buttons:
         self.window.overrideredirect(False)
 
         self.maximize_button.place_forget()
+        self.mini_start_button.place_forget()
+        self.mini_stop_button.place_forget()
+        self.mini_reset_button.place_forget()
+        self.mini_continue_button.place_forget()
+        self.exit_button.place_forget()
+        self.display_time_inst.time_label_min.place_forget()
 
         self.start_button.place(x=35, y=150)
         self.stop_button.place(x=160, y=150)
         self.reset_button.place(x=305, y=150)
-        self.minimize_button.place(x=400, y=0)
+        self.minimize_button.place(x=420, y=0)
 
-        self.display_time_inst.time_label.place(x=120, y=50)
+        self.display_time_inst.time_label_max.place(x=120, y=50)
+        self.display_time_inst.time_update()
 
     def exit(self):
         self.window.destroy()

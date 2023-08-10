@@ -40,8 +40,12 @@ class DisplayTime:
                 self.minute = 0
                 self.hour += 1
 
-            self.time_label_max.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
-            self.time_label_max.after(30, lambda: self.start_time())
+            if self.time_label_max.winfo_ismapped():
+                self.time_label_max.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
+                self.time_label_max.after(30, lambda: self.start_time())
+            else:
+                self.time_label_min.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
+                self.time_label_min.after(30, lambda: self.start_time())
 
     def stop_time(self):
         self.stop = True
@@ -55,3 +59,10 @@ class DisplayTime:
         self.hour = 0
 
         self.time_label_max.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
+        self.time_label_min.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
+
+    def time_update(self):
+        if self.time_label_max.winfo_ismapped():
+            self.time_label_max.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
+        else:
+            self.time_label_min.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
