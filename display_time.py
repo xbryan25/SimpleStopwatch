@@ -15,6 +15,7 @@ class DisplayTime:
         self.hour = 0
 
         self.stop = False
+        self.did_start = False
 
         # Initializing the label
 
@@ -27,6 +28,9 @@ class DisplayTime:
 
     def start_time(self):
         if not self.stop:
+            if not self.did_start:
+                self.did_start = True
+
             # The delay is 0.97 seconds to match the delay of the label.after function
             time.sleep(0.97)
             self.second += 1
@@ -57,6 +61,8 @@ class DisplayTime:
         self.second = 0
         self.minute = 0
         self.hour = 0
+
+        self.did_start = False
 
         self.time_label_max.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
         self.time_label_min.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
