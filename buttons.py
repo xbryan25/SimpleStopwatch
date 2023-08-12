@@ -12,22 +12,22 @@ class Buttons:
         # Initializing the buttons
 
         # When window is maximized
-        self.start_button = ctk.CTkButton(self.window, text="Start",
+        self.start_button = ctk.CTkButton(self.window, text="Start", font=("Times New Roman", 23),
                                           hover_color='blue', width=100, height=75,
                                           command=lambda: self.start_stopwatch())
         self.start_button.place(x=35, y=150)
 
-        self.continue_button = ctk.CTkButton(self.window, text="Continue",
+        self.continue_button = ctk.CTkButton(self.window, text="Continue", font=("Times New Roman", 23),
                                              hover_color='blue', width=100, height=75,
                                              command=lambda: self.continue_stopwatch())
 
-        self.stop_button = ctk.CTkButton(self.window, text="Stop",
+        self.stop_button = ctk.CTkButton(self.window, text="Stop", font=("Times New Roman", 23),
                                          hover_color='blue', width=100, height=75,
                                          command=lambda: self.stop_stopwatch())
         self.stop_button.place(x=160, y=150)
         self.stop_button.configure(state="disabled")
 
-        self.reset_button = ctk.CTkButton(self.window, text="Reset",
+        self.reset_button = ctk.CTkButton(self.window, text="Reset", font=("Times New Roman", 23),
                                           hover_color='blue', width=100, height=75,
                                           command=lambda: self.reset_stopwatch())
         self.reset_button.place(x=305, y=150)
