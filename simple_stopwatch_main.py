@@ -2,7 +2,6 @@ import customtkinter as ctk
 import buttons
 
 # TODO: Figure out why the color of the title bar changes when the window gets maximized
-# TODO: Finish the minimized version of the stopwatch
 # TODO: Redesign the application
 
 
@@ -12,7 +11,7 @@ def main():
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("green")
 
-    app.geometry("440x260")
+    app.geometry("440x240")
     app.resizable(False, False)
     app.title("SimpleStopwatch by xbryan")
 
