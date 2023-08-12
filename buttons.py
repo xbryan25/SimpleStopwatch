@@ -159,7 +159,11 @@ class Buttons:
         self.exit_button.place(x=155, y=0)
 
         # Add minimized buttons
-        self.mini_start_button.place(x=0, y=50)
+        if not self.display_time_inst.did_start:
+            self.mini_start_button.place(x=0, y=50)
+        else:
+            self.mini_continue_button.place(x=0, y=50)
+
         self.mini_reset_button.place(x=30, y=50)
 
         # Removes title bar
@@ -187,7 +191,12 @@ class Buttons:
         self.exit_button.place_forget()
         self.display_time_inst.time_label_min.place_forget()
 
-        self.start_button.place(x=35, y=150)
+        # Add minimized buttons
+        if not self.display_time_inst.did_start:
+            self.start_button.place(x=35, y=150)
+        else:
+            self.continue_button.place(x=35, y=150)
+
         self.stop_button.place(x=160, y=150)
         self.reset_button.place(x=305, y=150)
         self.minimize_button.place(x=420, y=0)
