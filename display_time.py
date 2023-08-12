@@ -7,7 +7,7 @@ class DisplayTime:
 
         self.window = window
 
-        self.font_tuple_1 = ("Times New Roman", 50)
+        self.font_tuple_1 = ("Times New Roman", 60)
         self.font_tuple_2 = ("Times New Roman", 30)
 
         self.second = 0
@@ -21,7 +21,7 @@ class DisplayTime:
 
         self.time_label_max = ctk.CTkLabel(self.window, text="00:00:00", fg_color="transparent",
                                            font=self.font_tuple_1)
-        self.time_label_max.place(x=120, y=50)
+        self.time_label_max.place(x=110, y=50)
 
         self.time_label_min = ctk.CTkLabel(self.window, text="00:00:00", fg_color="transparent",
                                            font=self.font_tuple_2)
