@@ -184,19 +184,7 @@ class Buttons:
 
         self.window.overrideredirect(False)
 
-        # From @Unnmanedbuthere_ from Youtube (for dark title bar) ----------
-        self.window.update()
-        DWMWA_USE_IMMERSIVE_DARK_MODE = 20
-        set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
-        get_parent = ct.windll.user32.GetParent
-        hwnd = get_parent(self.window.winfo_id())
-        rendering_policy = DWMWA_USE_IMMERSIVE_DARK_MODE
-        value = 2
-        value = ct.c_int(value)
-        set_window_attribute(hwnd, rendering_policy, ct.byref(value), ct.sizeof(value))
-        self.window.withdraw()
-        self.window.deiconify()
-        # ----------------------------------------------------------------
+        self.dark_title_bar()
 
         self.maximize_button.place_forget()
         self.mini_start_button.place_forget()
@@ -218,6 +206,22 @@ class Buttons:
 
         self.display_time_inst.time_label_max.place(x=120, y=50)
         self.display_time_inst.time_update()
+
+    def dark_title_bar(self):
+
+        # From @Unnmanedbuthere_ from Youtube (for dark title bar) ----------
+        self.window.update()
+        DWMWA_USE_IMMERSIVE_DARK_MODE = 20
+        set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
+        get_parent = ct.windll.user32.GetParent
+        hwnd = get_parent(self.window.winfo_id())
+        rendering_policy = DWMWA_USE_IMMERSIVE_DARK_MODE
+        value = 2
+        value = ct.c_int(value)
+        set_window_attribute(hwnd, rendering_policy, ct.byref(value), ct.sizeof(value))
+        self.window.withdraw()
+        self.window.deiconify()
+        # ----------------------------------------------------------------
 
     def exit(self):
         self.window.destroy()
