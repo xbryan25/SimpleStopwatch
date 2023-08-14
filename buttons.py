@@ -5,14 +5,19 @@ import ctypes as ct
 
 class Buttons:
     def __init__(self, window):
-
         self.window = window
 
         self.display_time_inst = display_time.DisplayTime(self.window)
 
+        # Default appearance mode is dark
+        self.appearance_mode = "dark"
+
+        # Default state is maximized
+        self.window_state = "maximized"
+
         # Initializing the buttons
 
-        # When window is maximized
+        # -----------------------When window is maximized-------------------------
         self.start_button = ctk.CTkButton(self.window, text="Start", font=("Times New Roman", 23),
                                           hover_color='blue', width=100, height=75,
                                           command=lambda: self.start_stopwatch())
@@ -34,12 +39,17 @@ class Buttons:
         self.reset_button.place(x=305, y=150)
         self.reset_button.configure(state="disabled")
 
-        self.minimize_button = ctk.CTkButton(self.window, text="-",
-                                             hover_color='blue', width=20, height=20,
+        self.minimize_button = ctk.CTkButton(self.window, text="-", font=("Times New Roman", 20),
+                                             hover_color='blue', width=35, height=35,
                                              command=lambda: self.minimize())
-        self.minimize_button.place(x=420, y=0)
+        self.minimize_button.place(x=405, y=0)
 
-        # When window is minimized
+        self.change_appearance_button = ctk.CTkButton(self.window, text="☀", font=("Times New Roman", 20),
+                                                      hover_color='blue', width=35, height=35,
+                                                      command=lambda: self.change_appearance_mode())
+        self.change_appearance_button.place(x=405, y=40)
+
+        # -----------------------When window is minimized-------------------------
         self.maximize_button = ctk.CTkButton(self.window, text="+",
                                              hover_color='blue', width=20, height=20,
                                              command=lambda: self.maximize())
@@ -67,6 +77,10 @@ class Buttons:
                                                command=lambda: self.reset_stopwatch())
 
         self.mini_reset_button.configure(state="disabled")
+
+        self.mini_change_appearance_button = ctk.CTkButton(self.window, text="L", font=("Times New Roman", 11),
+                                                           hover_color='blue', width=20, height=20,
+                                                           command=lambda: self.change_appearance_mode())
 
     def start_stopwatch(self):
         if self.mini_start_button.winfo_ismapped():
@@ -145,11 +159,14 @@ class Buttons:
         self.display_time_inst.reset_time()
 
     def minimize(self):
+        self.window_state = "minimized"
+
         self.start_button.place_forget()
         self.continue_button.place_forget()
         self.reset_button.place_forget()
         self.stop_button.place_forget()
         self.minimize_button.place_forget()
+        self.change_appearance_button.place_forget()
 
         self.display_time_inst.time_label_max.place_forget()
         self.display_time_inst.time_label_min.place(x=35, y=15)
@@ -157,7 +174,14 @@ class Buttons:
         self.display_time_inst.time_update()
 
         self.maximize_button.place(x=0, y=0)
-        self.exit_button.place(x=155, y=0)
+        self.exit_button.place(x=150, y=0)
+
+        self.mini_change_appearance_button.place(x=150, y=50)
+
+        if self.appearance_mode == "light":
+            self.mini_change_appearance_button.configure(text="D")
+        elif self.appearance_mode == "dark":
+            self.mini_change_appearance_button.configure(text="L")
 
         # Add minimized buttons
         if not self.display_time_inst.did_start:
@@ -180,6 +204,8 @@ class Buttons:
         self.window.geometry(f"+{event.x_root - 110}+{event.y_root - 38}")
 
     def maximize(self):
+        self.window_state = "maximized"
+
         self.window.geometry("440x260")
 
         self.window.overrideredirect(False)
@@ -191,6 +217,7 @@ class Buttons:
         self.mini_stop_button.place_forget()
         self.mini_reset_button.place_forget()
         self.mini_continue_button.place_forget()
+        self.mini_change_appearance_button.place_forget()
         self.exit_button.place_forget()
         self.display_time_inst.time_label_min.place_forget()
 
@@ -202,26 +229,51 @@ class Buttons:
 
         self.stop_button.place(x=160, y=150)
         self.reset_button.place(x=305, y=150)
-        self.minimize_button.place(x=420, y=0)
+        self.minimize_button.place(x=400, y=0)
+        self.change_appearance_button.place(x=400, y=45)
+
+        if self.appearance_mode == "light":
+            self.change_appearance_button.configure(text="🌙")
+        elif self.appearance_mode == "dark":
+            self.change_appearance_button.configure(text="☀")
 
         self.display_time_inst.time_label_max.place(x=120, y=50)
         self.display_time_inst.time_update()
 
     def dark_title_bar(self):
-
-        # From @Unnmanedbuthere_ from Youtube (for dark title bar) ----------
-        self.window.update()
-        DWMWA_USE_IMMERSIVE_DARK_MODE = 20
-        set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
-        get_parent = ct.windll.user32.GetParent
-        hwnd = get_parent(self.window.winfo_id())
-        rendering_policy = DWMWA_USE_IMMERSIVE_DARK_MODE
-        value = 2
-        value = ct.c_int(value)
-        set_window_attribute(hwnd, rendering_policy, ct.byref(value), ct.sizeof(value))
-        self.window.withdraw()
-        self.window.deiconify()
-        # ----------------------------------------------------------------
+        if self.appearance_mode == "dark":
+            # From @Unnmanedbuthere_ from Youtube (for dark title bar) ----------
+            self.window.update()
+            DWMWA_USE_IMMERSIVE_DARK_MODE = 20
+            set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
+            get_parent = ct.windll.user32.GetParent
+            hwnd = get_parent(self.window.winfo_id())
+            rendering_policy = DWMWA_USE_IMMERSIVE_DARK_MODE
+            value = 2
+            value = ct.c_int(value)
+            set_window_attribute(hwnd, rendering_policy, ct.byref(value), ct.sizeof(value))
+            self.window.withdraw()
+            self.window.deiconify()
+            # ----------------------------------------------------------------
 
     def exit(self):
         self.window.destroy()
+
+    def change_appearance_mode(self):
+        if self.appearance_mode == "dark":
+            if self.window_state == "minimized":
+                self.mini_change_appearance_button.configure(text="D")
+            elif self.window_state == "maximized":
+                self.change_appearance_button.configure(text="🌙")
+
+            self.appearance_mode = "light"
+            ctk.set_appearance_mode("light")
+
+        elif self.appearance_mode == "light":
+            if self.window_state == "minimized":
+                self.mini_change_appearance_button.configure(text="L")
+            elif self.window_state == "maximized":
+                self.change_appearance_button.configure(text="☀")
+
+            self.appearance_mode = "dark"
+            ctk.set_appearance_mode("dark")
