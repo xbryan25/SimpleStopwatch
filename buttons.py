@@ -1,5 +1,6 @@
 import customtkinter as ctk
 import display_time
+import ctypes as ct
 
 
 class Buttons:
@@ -182,6 +183,20 @@ class Buttons:
         self.window.geometry("440x260")
 
         self.window.overrideredirect(False)
+
+        # From @Unnmanedbuthere_ from Youtube (for dark title bar) ----------
+        self.window.update()
+        DWMWA_USE_IMMERSIVE_DARK_MODE = 20
+        set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
+        get_parent = ct.windll.user32.GetParent
+        hwnd = get_parent(self.window.winfo_id())
+        rendering_policy = DWMWA_USE_IMMERSIVE_DARK_MODE
+        value = 2
+        value = ct.c_int(value)
+        set_window_attribute(hwnd, rendering_policy, ct.byref(value), ct.sizeof(value))
+        self.window.withdraw()
+        self.window.deiconify()
+        # ----------------------------------------------------------------
 
         self.maximize_button.place_forget()
         self.mini_start_button.place_forget()

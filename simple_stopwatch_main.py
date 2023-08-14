@@ -1,19 +1,18 @@
 import customtkinter as ctk
 import buttons
 
-# TODO: Figure out why the color of the title bar changes when the window gets maximized
 # TODO: Redesign the application
+# TODO: Center window upon initialization
 
 
 def main():
     app = ctk.CTk()
-
-    ctk.set_appearance_mode("dark")
-    ctk.set_default_color_theme("green")
-
     app.geometry("440x240")
     app.resizable(False, False)
     app.title("SimpleStopwatch by xbryan")
+
+    ctk.set_appearance_mode("dark")
+    ctk.set_default_color_theme("green")
 
     buttons.Buttons(app)
 
