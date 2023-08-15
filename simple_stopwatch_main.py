@@ -2,6 +2,7 @@ import customtkinter as ctk
 import buttons
 
 # TODO: Redesign the application
+# TODO: Add stopwatch icon
 
 
 def main():
@@ -15,6 +16,8 @@ def main():
 
     app.resizable(False, False)
     app.title("SimpleStopwatch v1.0 by xbryan")
+
+    # app.iconbitmap()
 
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("green")
