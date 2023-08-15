@@ -8,7 +8,7 @@ def main():
     app = ctk.CTk()
 
     app_width = 440
-    app_height = 240
+    app_height = 230
 
     app.geometry(f"{app_width}x{app_height}")
     app.eval("tk::PlaceWindow . center")

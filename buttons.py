@@ -206,7 +206,7 @@ class Buttons:
     def maximize(self):
         self.window_state = "maximized"
 
-        self.window.geometry("440x260")
+        self.window.geometry("440x230")
 
         self.window.overrideredirect(False)
 
