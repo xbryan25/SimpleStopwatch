@@ -2,14 +2,19 @@ import customtkinter as ctk
 import buttons
 
 # TODO: Redesign the application
-# TODO: Center window upon initialization
 
 
 def main():
     app = ctk.CTk()
-    app.geometry("440x240")
+
+    app_width = 440
+    app_height = 240
+
+    app.geometry(f"{app_width}x{app_height}")
+    app.eval("tk::PlaceWindow . center")
+
     app.resizable(False, False)
-    app.title("SimpleStopwatch by xbryan")
+    app.title("SimpleStopwatch v1.0 by xbryan")
 
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("green")
