@@ -273,10 +273,10 @@ class Buttons:
             ct.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
             self.window.iconbitmap("Assets/stopwatch_day.ico")
-            ctk.set_appearance_mode("light")
 
             # A delay is added so that the icon in the taskbar won't blink and disappear
             time.sleep(0.4)
+            ctk.set_appearance_mode("light")
 
         elif self.appearance_mode == "light":
             if self.window_state == "minimized":
@@ -290,7 +290,7 @@ class Buttons:
             ct.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
             self.window.iconbitmap("Assets/stopwatch_night.ico")
-            ctk.set_appearance_mode("dark")
 
             # Same as above
             time.sleep(0.4)
+            ctk.set_appearance_mode("dark")
