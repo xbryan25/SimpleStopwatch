@@ -1,6 +1,5 @@
 import customtkinter as ctk
 import ctypes
-import time
 import buttons
 
 # TODO: Redesign the application
