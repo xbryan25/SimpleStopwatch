@@ -1,8 +1,7 @@
 import customtkinter as ctk
-import ctypes
-import buttons
+import ctypes as ct
 
-# TODO: Redesign the application
+import buttons
 
 
 def main():
@@ -15,7 +14,7 @@ def main():
     app.eval("tk::PlaceWindow . center")
 
     myappid = u'mycompany.myproduct.subproduct.version'
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+    ct.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     app.resizable(False, False)
     app.title("SimpleStopwatch v1.0 by xbryan")

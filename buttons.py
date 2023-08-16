@@ -1,7 +1,8 @@
 import customtkinter as ctk
-import display_time
 import ctypes as ct
 import time
+
+import display_time
 
 
 class Buttons:
