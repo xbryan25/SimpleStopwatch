@@ -31,8 +31,8 @@ class DisplayTime:
             if not self.did_start:
                 self.did_start = True
 
-            # The delay is 0.97 seconds to match the delay of the label.after function
-            time.sleep(0.97)
+            # The delay is 0.96 seconds to match the delay of the label.after function
+            time.sleep(0.96)
             self.second += 1
 
             if self.second == 60:
