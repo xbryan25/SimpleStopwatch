@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from PIL import Image, ImageTk
 import buttons
 
 # TODO: Redesign the application
@@ -17,7 +18,7 @@ def main():
     app.resizable(False, False)
     app.title("SimpleStopwatch v1.0 by xbryan")
 
-    # app.iconbitmap()
+    app.iconbitmap("Assets/stopwatch_night.ico")
 
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("green")

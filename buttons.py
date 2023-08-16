@@ -267,6 +267,8 @@ class Buttons:
                 self.change_appearance_button.configure(text="🌙")
 
             self.appearance_mode = "light"
+
+            self.window.iconbitmap("Assets/stopwatch_day.ico")
             ctk.set_appearance_mode("light")
 
         elif self.appearance_mode == "light":
@@ -276,4 +278,6 @@ class Buttons:
                 self.change_appearance_button.configure(text="☀")
 
             self.appearance_mode = "dark"
+
+            self.window.iconbitmap("Assets/stopwatch_night.ico")
             ctk.set_appearance_mode("dark")
