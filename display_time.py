@@ -31,8 +31,9 @@ class DisplayTime:
             if not self.did_start:
                 self.did_start = True
 
-            # The delay is 0.96 seconds to match the delay of the label.after function
-            time.sleep(0.96)
+            if self.second == 0 and self.minute == 0 and self.hour == 0:
+                # The delay is 0.96 seconds to match the delay of the label.after function
+                time.sleep(0.96)
             self.second += 1
 
             if self.second == 60:
@@ -46,10 +47,10 @@ class DisplayTime:
 
             if self.time_label_max.winfo_ismapped():
                 self.time_label_max.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
-                self.time_label_max.after(30, lambda: self.start_time())
+                self.time_label_max.after(990, lambda: self.start_time())
             else:
                 self.time_label_min.configure(text=f"{self.hour:02d}:{self.minute:02d}:{self.second:02d}")
-                self.time_label_min.after(30, lambda: self.start_time())
+                self.time_label_min.after(990, lambda: self.start_time())
 
     def stop_time(self):
         self.stop = True
