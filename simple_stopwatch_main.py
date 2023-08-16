@@ -1,9 +1,9 @@
 import customtkinter as ctk
-from PIL import Image, ImageTk
+import ctypes
+import time
 import buttons
 
 # TODO: Redesign the application
-# TODO: Add stopwatch icon
 
 
 def main():
@@ -14,6 +14,9 @@ def main():
 
     app.geometry(f"{app_width}x{app_height}")
     app.eval("tk::PlaceWindow . center")
+
+    myappid = u'mycompany.myproduct.subproduct.version'
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     app.resizable(False, False)
     app.title("SimpleStopwatch v1.0 by xbryan")
