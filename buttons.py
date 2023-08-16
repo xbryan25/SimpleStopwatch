@@ -1,6 +1,7 @@
 import customtkinter as ctk
 import display_time
 import ctypes as ct
+import time
 
 
 class Buttons:
@@ -268,8 +269,14 @@ class Buttons:
 
             self.appearance_mode = "light"
 
+            myappid = u'mycompany.myproduct.subproduct.version'
+            ct.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
             self.window.iconbitmap("Assets/stopwatch_day.ico")
             ctk.set_appearance_mode("light")
+
+            # A delay is added so that the icon in the taskbar won't blink and disappear
+            time.sleep(0.4)
 
         elif self.appearance_mode == "light":
             if self.window_state == "minimized":
@@ -279,5 +286,11 @@ class Buttons:
 
             self.appearance_mode = "dark"
 
+            myappid = u'mycompany.myproduct.subproduct.version'
+            ct.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
             self.window.iconbitmap("Assets/stopwatch_night.ico")
             ctk.set_appearance_mode("dark")
+
+            # Same as above
+            time.sleep(0.4)
