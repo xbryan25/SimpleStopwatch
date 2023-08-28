@@ -163,6 +163,7 @@ class Buttons:
     def minimize(self):
         self.window_state = "minimized"
 
+        # Forget all buttons in maximized mode
         self.start_button.place_forget()
         self.continue_button.place_forget()
         self.reset_button.place_forget()
@@ -192,6 +193,12 @@ class Buttons:
             self.mini_continue_button.place(x=0, y=50)
 
         self.mini_reset_button.place(x=30, y=50)
+
+        # If stopwatch is running
+        if self.display_time_inst.did_start and not self.display_time_inst.stop:
+            self.mini_continue_button.place_forget()
+            self.mini_stop_button.place(x=0, y=50)
+            self.mini_stop_button.configure(state="normal")
 
         # Removes title bar
         self.window.overrideredirect(True)
@@ -233,6 +240,10 @@ class Buttons:
         self.reset_button.place(x=305, y=150)
         self.minimize_button.place(x=400, y=0)
         self.change_appearance_button.place(x=400, y=45)
+
+        if self.display_time_inst.did_start:
+            self.continue_button.configure(state="disabled")
+            self.stop_button.configure(state="normal")
 
         if self.appearance_mode == "light":
             self.change_appearance_button.configure(text="🌙")
