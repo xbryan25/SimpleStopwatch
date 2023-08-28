@@ -17,7 +17,7 @@ def main():
     ct.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     app.resizable(False, False)
-    app.title("SimpleStopwatch v1.0 by xbryan")
+    app.title("SimpleStopwatch v1.1 by xbryan")
 
     app.iconbitmap("Assets/stopwatch_night.ico")
 
